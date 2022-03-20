@@ -1,14 +1,13 @@
-
-
 import tweepy
 
-auth = tweepy.OAuth1UserHandler(
-   "yCNiXLDzpkAmcDlX0J3TgWEbP", "nftIllHjeJbUNonzCFhPOV4JaKCy6GXn2IHeqYDSCABKItAltz", 
-   "1683252618-Xvu4ARYu6wp4jaEejhXoBngcU3VPuC2DGOGQc8y", "xzVh1UhtlbAJ1UG1sfSb32Q0q8OshyjuAJQsjz0rRFbVQ"
-)
+client = tweepy.Client(bearer_token='AAAAAAAAAAAAAAAAAAAAALe2aQEAAAAA90C5FoIsZ%2BUS9iU1q4AHo4AApnw%3DOoZPqcsyR1qFEi9oH51Es3lkngN3wegmyY00LIB3KQOUme4nJv')
 
-api = tweepy.API(auth)
+# Replace with your own search query
+query = 'from:suhemparack -is:retweet'
 
-public_tweets = api.home_timeline()
-for tweet in public_tweets:
+tweets = client.search_all_tweets(query=query, tweet_fields=['context_annotations', 'created_at'], max_results=100)
+
+for tweet in tweets.data:
     print(tweet.text)
+    if len(tweet.context_annotations) > 0:
+        print(tweet.context_annotations)
