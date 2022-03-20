@@ -1,15 +1,14 @@
+
+
 import tweepy
 
-# Authenticate to Twitter
-auth = tweepy.OAuthHandler("qkwnE4vowlKsHX0C3cogh8umD", 
-    "HVC35mHAKomL2uJs7NYKcjcjVowu2Rnv8X1RzgadqhsNWtQz6n")
-auth.set_access_token("1683252618-bPpnrFb1uutWLGvQbLvS6X4l0UcpND8ZWJy7EGC", 
-    "0uJrTlNqza9NopJOekA2TX3T9kqBNmswgPZNJ93xLwgAm")
+auth = tweepy.OAuth1UserHandler(
+   "yCNiXLDzpkAmcDlX0J3TgWEbP", "nftIllHjeJbUNonzCFhPOV4JaKCy6GXn2IHeqYDSCABKItAltz", 
+   "1683252618-Xvu4ARYu6wp4jaEejhXoBngcU3VPuC2DGOGQc8y", "xzVh1UhtlbAJ1UG1sfSb32Q0q8OshyjuAJQsjz0rRFbVQ"
+)
 
 api = tweepy.API(auth)
 
-try:
-    api.verify_credentials()
-    print("Authentication OK")
-except:
-    print("Error during authentication")
+public_tweets = api.home_timeline()
+for tweet in public_tweets:
+    print(tweet.text)
